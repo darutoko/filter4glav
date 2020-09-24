@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<title>Фильтр для Глобальной Авантюры: Настройки</title>
+	<style>
+		#inputFlags {
+			max-width: 5em;
+		}
+		@media (max-width: 575.98px) {
+			form .btn-primary {
+				width: 100%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h3>Фильтр для Глобальной Авантюры: Настройки</h3>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<div class="card mb-4">
+					<h5 class="card-header text-center">Добавить фильтр</h5>
+					<div class="card-body">
+						<form>
+							<fieldset id="fieldsetFilter" disabled="disabled">
+								<div class="form-group">
+									<input class="form-control d-inline-block w-100" type="text" name="regexp" id="inputFilter">
+									<input class="form-control d-none" type="text" name="flags" id="inputFlags" placeholder="Флаги">
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="type" id="radioPhrase" value="phrase" checked>
+									<label class="form-check-label" for="radioPhrase">Фраза</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="type" id="radioRegexp" value="regexp">
+									<label class="form-check-label" for="radioRegexp">Регулярное выражение</label>
+								</div>
+								<div class="form-group text-center mt-3">
+									<button id="buttonAddFilter" class="btn btn-primary" title="Добавить">Добавить</button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<h5 class="card-header text-center">Фильтры</h5>
+					<ul id="filtersList" class="list-group list-group-flush">
+						<li class="list-group-item"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="options.js"></script>
+</body>
+</html>

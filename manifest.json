@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	"name": "Filter for GA",
+	"version": "1.1",
+	"description": "Расширение для фильтрации сообщений на форуме Глобальной Авантюры",
+	"options_ui": {
+		"page": "options.html",
+		"open_in_tab": true
+	},
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+	"permissions": [
+		"storage"
+	],
+	"content_scripts": [
+		{
+			"run_at": "document_end",
+			"matches": ["*://glav.su/*/messages/*"],
+			"js": ["content.js"],
+			"css": ["content.css"]
+		}
+	]
+}
