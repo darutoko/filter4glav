@@ -26,17 +26,17 @@ function applyFilters() {
 		let threadId = threadLink.getAttribute("href").split("/").slice(2, 4).join("_")
 
 		if (threadId in filters.threads) {
-			addControlsItem(message, createButton("fg-btni-show-thread", () => onShowThread(threadId), { title: "Показывать тред" }))
+			addControlsItem(message, createButton("fg-btni-show-thread", event => onShowThread(event, threadId), { title: "Показывать тред" }))
 			hideMessageContent(message, "Тред скрыт")
 			return
 		}
-		addControlsItem(message, createButton("fg-btni-hide-thread", () => onHideThread(threadId), { title: "Скрывать тред" }))
+		addControlsItem(message, createButton("fg-btni-hide-thread", event => onHideThread(event, threadId), { title: "Скрывать тред" }))
 
 		// Message text content
 		let text = message.content.textContent
 		for (let pattern of filters.patterns) {
 			if ("regexp" in pattern && pattern.regexp.test(text)) {
-				hideMessageContent(message, pattern.display)
+				hideMessageContent(message, "Фильтр: " + pattern.display)
 				return
 				// let filterBoxId = message.id + "Filter";
 				// Create button
@@ -100,25 +100,25 @@ function createListItem(element) {
 function hideMessageContent(message, displayText) {
 	let filterDisplay = document.createElement("span")
 	filterDisplay.setAttribute("style", "padding-right: 10px;")
-	filterDisplay.append("Фильтр: " + displayText)
+	filterDisplay.append(displayText)
 
 	addControlsItem(message, createButton("fg-btn fg-btni-show-message", event => onToggleMessage(event.target, message.id)) )
 	addControlsItem(message, filterDisplay)
 	message.content.parentElement.classList.add("fg-hidden")
 }
 
-function onHideThread(threadId) {
+function onHideThread(event, threadId) {
 	if (threadId in filters.threads) return
 	filters.threads[threadId] = {expiresAt: Date.now() + 604800000}
-	console.log(JSON.stringify(filters))
 	saveFilters()
+	event.target.parentElement.remove()
 }
 
-function onShowThread(threadId) {
+function onShowThread(event, threadId) {
 	if (!(threadId in filters.threads)) return
 	delete filters.threads[threadId]
-	console.log(JSON.stringify(filters))
 	saveFilters()
+	event.target.parentElement.remove()
 }
 
 function onToggleMessage(button, messageId) {

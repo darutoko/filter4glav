@@ -18,7 +18,7 @@
 	"content_scripts": [
 		{
 			"run_at": "document_end",
-			"matches": ["*://glav.su/*/messages/*"],
+			"matches": ["*://glav.su/forum/*/*/*"],
 			"js": ["content.js"],
 			"css": ["content.css"]
 		}
