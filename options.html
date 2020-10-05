@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="bootstrap.min.css">
 	<link rel="stylesheet" href="content.css">
-	<title>Фильтр для Глобальной Авантюры: Настройки</title>
+	<title>Фильтр для Глобальной Авантюры</title>
 	<style>
 		#inputFlags {
 			max-width: 5em;
@@ -21,7 +21,17 @@
 	<div class="container">
 		<div class="row py-3">
 			<div class="col">
-				<h3>Фильтр для Глобальной Авантюры: Настройки</h3>
+				<h3 class="text-center">Фильтр для Глобальной Авантюры</h3>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col text-right">
+				<a id="exportButton" class="btn btn-secondary" href="download" download="filters.json">Экспортировать</a>
+			</div>
+			<div class="col">
+				<input type="file" name="import" id="importInput" class="d-none" accept=".json">
+				<button type="button" id="importButton" class="btn btn-secondary">Импортировать</button>
 			</div>
 		</div>
 
@@ -107,6 +117,9 @@
 									У всех скрытых сообщений будет добавлена кнопка <strong>Показать сообщение</strong>
 									<span class="fg-btn fg-btni-show-message">&nbsp;</span>, нажав на которую можно раскрыть сообщение.
 								</p>
+								<h4>Сохранение / Загрузка настроек</h4>
+								<p>Используйте кнопку <strong>Экспортировать</strong>, что бы сохранить фильтры в файл.</p>
+								<p>Используйте кнопку <strong>Импортировать</strong>, что бы загрузить фильтры из файла.</p>
 							</div>
 						</div>
 

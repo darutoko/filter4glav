@@ -4,7 +4,11 @@ document.getElementById("buttonAddFilter").addEventListener("click", addFilter)
 document.getElementById("radioPhrase").addEventListener("click", toggleFlagsInput)
 document.getElementById("radioRegexp").addEventListener("click", toggleFlagsInput)
 
-document.querySelectorAll("#tabsNav a").forEach(evement => evement.addEventListener("click", toggleTabs))
+document.querySelectorAll("#tabsNav a").forEach(event => event.addEventListener("click", toggleTabs))
+
+document.getElementById("exportButton").addEventListener("click", exportFilters)
+document.getElementById("importButton").addEventListener("click", () => document.getElementById("importInput").click())
+document.getElementById("importInput").addEventListener("change", importFilters)
 
 chrome.storage.local.get(["filters"], result => {
 	filters = convertFilters(result.filters)
@@ -97,6 +101,29 @@ function toggleTabs(event) {
 	document.querySelectorAll("[role=tabpanel]").forEach(t => t.classList.remove("active", "show"))
 	document.getElementById(tab.dataset.target).classList.add("active", "show")
 	tab.classList.add("active")
+}
+
+function exportFilters(event) {
+	this.href = "data:application/json," + escape(JSON.stringify(filters))
+}
+
+function importFilters(event) {
+	let file = event.target.files[0]
+	if (!file) return
+
+	let reader = new FileReader()
+	reader.addEventListener("load", () => {
+		try {
+			let result = JSON.parse(unescape(reader.result))
+			filters = result
+			chrome.storage.local.set({ filters })
+		} catch (error) {
+			alert("Не удалось загрузить настройки. Возможно файл поврежден.")
+		}
+		event.target.value = ""
+		displayFilters()
+	})
+	reader.readAsText(file)
 }
 
 function escapeRegexp(text) {
