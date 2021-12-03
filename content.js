@@ -11,16 +11,16 @@ function applyFilters() {
 	filters.patterns.forEach(pattern => {
 		if ("string" in pattern && "flags" in pattern) pattern.regexp = RegExp(pattern.string, pattern.flags)
 	})
-	document.querySelectorAll(".bl-ml-m").forEach(msg => {
+	document.querySelectorAll(".a-mp-m").forEach(msg => {
 		let message = {
 			id: msg.id,
-			thread: msg.querySelector(".bl-ml-m-th")
+			thread: msg.querySelector(".a-mp-m-th")
 		}
 		// Highly likely message was deleted if there is no thread DOM element: skip it!
 		if (!message.thread) return
 
 		// Can't move this to message definition, reason: will throw if there is a deleted message on the page
-		message.controls = msg.querySelector("ul.bl-btns")
+		message.controls = msg.querySelector("ul.bl--buttons")
 		message.content = message.thread.parentElement
 		let threadLink = message.thread.firstElementChild
 		let threadId = threadLink.getAttribute("href").split("/").slice(2, 4).join("_")
@@ -122,7 +122,7 @@ function onShowThread(event, threadId) {
 }
 
 function onToggleMessage(button, messageId) {
-	let messageBody = document.getElementById(messageId).querySelector(".bl-ml-m-th").parentElement.parentElement
+	let messageBody = document.getElementById(messageId).querySelector(".a-mp-m-th").parentElement.parentElement
 	// messageBody.removeAttribute("style");
 	messageBody.classList.toggle("fg-hidden")
 	button.classList.toggle("fg-btni-show-message")
