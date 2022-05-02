@@ -2,7 +2,7 @@ var filters
 
 chrome.storage.local.get(["filters"], result => {
 	filters = convertFilters(result.filters)
-	console.log(JSON.stringify(filters))
+	// console.log(JSON.stringify(filters))
 	applyFilters()
 	cleanupFilters()
 })
@@ -37,6 +37,7 @@ function applyFilters() {
 		for (let pattern of filters.patterns) {
 			if ("regexp" in pattern && pattern.regexp.test(text)) {
 				hideMessageContent(message, "Фильтр: " + pattern.display)
+				return
 			}
 		}
 	})

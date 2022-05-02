@@ -12,7 +12,7 @@ document.getElementById("importInput").addEventListener("change", importFilters)
 
 chrome.storage.local.get(["filters"], result => {
 	filters = convertFilters(result.filters)
-	console.log(filters)
+	// console.log(filters)
 	document.getElementById("fieldsetFilter").removeAttribute("disabled")
 	displayFilters()
 })
